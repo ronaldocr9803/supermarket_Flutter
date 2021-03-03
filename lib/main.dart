@@ -24,66 +24,71 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Welcome to Flutter',
-      home: Scaffold(
-        // AppBar
-        appBar: AppBar( 
-          backgroundColor: Colors.grey[350],
-          leadingWidth: 60,
-          leading: Padding(
-            padding: EdgeInsets.only(left: 16),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: Text(
-                    "Clear", 
-                    style: TextStyle( 
-                      fontSize: 17, 
-                      color: Colors.lightBlue
-                    )
-                  ),
-                ),
-              ],
-            ),
-          ),
-          title: Text(
-            "Supermarket", 
-            style: TextStyle( 
-              color: Colors.black, 
-              fontWeight: FontWeight.w600, 
-              fontSize: 17,
-            )
-          ),
-        ),
-        body: MultiProvider(  
+      home: MultiProvider(  
           providers: [
             ChangeNotifierProvider<CartModel>(create: (context) => CartModel()),
             // ChangeNotifierProvider<Item>(create: (context) => Item())
           ],
-          child:  Column(
-            children: [
-              AvailableItems(),
-              Consumer<CartModel> (
-                builder: (context, cart, child) => Container(
-                  child: Column(  
+          child: Consumer<CartModel> ( 
+            builder: (context, cart, child) => Scaffold(
+            // AppBar
+              appBar: AppBar( 
+                backgroundColor: Colors.grey[350],
+                leadingWidth: 60,
+                leading: Padding(
+                  padding: EdgeInsets.only(left: 16),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      for (var myItem in cart.myCart) 
-                        // Consumer<Item> ( 
-                        //   builder: (context, cart, child) =>
-                        // )
-                        ItemSelected(item: myItem)
+                      GestureDetector(
+                        onTap: () {
+                          cart.removeAllItem();
+                          // print("on clear");
+                          // cart.myCart = [];
+                        },
+                        child: Text(
+                          "Clear", 
+                          style: TextStyle( 
+                            fontSize: 17, 
+                            color: Colors.lightBlue
+                          )
+                        ),
+                      ),
                     ],
+                  ),
+                ),
+                title: Text(
+                  "Supermarket", 
+                  style: TextStyle( 
+                    color: Colors.black, 
+                    fontWeight: FontWeight.w600, 
+                    fontSize: 17,
                   )
-                )
+                ),
               ),
-              Spacer(),
-              Payout(totalPrice: 0,)
-            ],
+              body: Column(
+                children: [
+                  AvailableItems(),
+                  Container(
+                    child: Column(  
+                      children: [
+                        for (var myItem in cart.myCart) 
+                          // Consumer<Item> ( 
+                          //   builder: (context, cart, child) =>
+                          // )
+                          ItemSelected(item: myItem)
+                      ],
+                    )
+                  ),
+                  Spacer(),
+                  Payout(totalPrice: 0,)
+                ],
+              )
+            ),
           )
-        )
-
-      ),
+          
+      )
+      
     );
   }
 }

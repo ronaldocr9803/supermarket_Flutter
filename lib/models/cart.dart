@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import '../Items.dart';
 
 class CartModel extends ChangeNotifier {
-  final List<Item> myCart = [];
+  List<Item> myCart = [];
   double totalPrice = 0;
   
     /// Adds [item] to cart. This is the only way to modify the cart from outside.
@@ -30,6 +30,12 @@ class CartModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void removeAllItem() {
+    myCart = [];
+    getTotalPrice();
+    notifyListeners();
+  }
+
   void getTotalPrice() {
     // double sum  = 0;
     totalPrice = 0;
@@ -39,6 +45,5 @@ class CartModel extends ChangeNotifier {
     print(totalPrice);
     notifyListeners();
     // return sum;
-    
   }
 }
