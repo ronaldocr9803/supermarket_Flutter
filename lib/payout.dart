@@ -11,7 +11,7 @@ class Payout extends StatelessWidget {
   final double totalPrice;
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<CartModel>(context, listen: false);
+    // final cart = Provider.of<CartModel>(context, listen: false);
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(

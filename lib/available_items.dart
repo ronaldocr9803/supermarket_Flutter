@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:supermarket/item_selected.dart';
 import 'package:supermarket/models/cart.dart';
 
-import 'Items.dart';
+import 'models/Items.dart';
 
 class ItemCard extends StatelessWidget {
   const ItemCard({
@@ -18,7 +18,6 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<CartModel>(context, listen: false);
-    // final counter = Provider.of<Item>(context, listen: false);
     return GestureDetector(
       
       onTap: () {
