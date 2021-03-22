@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import '../Items.dart';
+import 'Items.dart';
 
 class CartModel extends ChangeNotifier {
   List<Item> myCart = [];
@@ -13,7 +13,8 @@ class CartModel extends ChangeNotifier {
       ++item.count;
       print("${item.name} exists");
     }
-    else {
+    else { 
+      item.count = 1;
       myCart.add(item);
     }
     // This line tells [Model] that it should rebuild the widgets that
@@ -23,7 +24,6 @@ class CartModel extends ChangeNotifier {
 
   void remove(Item item) {
     
-    // myCart.remove(item);
     myCart.removeWhere((a) => a == item);
     // Don't forget to tell dependent widgets to rebuild _every time_
     // you change the model.
@@ -37,7 +37,6 @@ class CartModel extends ChangeNotifier {
   }
 
   void getTotalPrice() {
-    // double sum  = 0;
     totalPrice = 0;
     for (var item in myCart) {
       totalPrice = totalPrice + item.price*item.count;
@@ -46,4 +45,6 @@ class CartModel extends ChangeNotifier {
     notifyListeners();
     // return sum;
   }
+
+  
 }
